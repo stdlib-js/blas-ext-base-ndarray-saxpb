@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,17 +16,29 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@esm/index.d.ts"/>
+
+import { float32ndarray, typedndarray } from '@stdlib/types/ndarray';
 
 /**
-* Multiply each element in a one-dimensional single-precision floating-point ndarray by a scalar constant and add a scalar constant to each result.
+* Multiplies each element in a one-dimensional single-precision floating-point ndarray by a scalar constant and adds a scalar constant to each result.
 *
-* @module @stdlib/blas-ext-base-ndarray-saxpb
+* ## Notes
+*
+* -   The function expects the following ndarrays:
+*
+*     -   a one-dimensional input ndarray.
+*     -   a zero-dimensional ndarray containing the scalar constant to multiply.
+*     -   a zero-dimensional ndarray containing the scalar constant to add.
+*
+* @param arrays - array-like object containing ndarrays
+* @returns input ndarray
 *
 * @example
 * var Float32Vector = require( '@stdlib/ndarray-vector-float32' );
 * var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
-* var saxpb = require( '@stdlib/blas-ext-base-ndarray-saxpb' );
 *
 * var x = new Float32Vector( [ -2.0, 1.0, 3.0, -5.0 ] );
 *
@@ -41,12 +53,9 @@
 * var out = saxpb( [ x, alpha, beta ] );
 * // returns <ndarray>[ -7.0, 8.0, 18.0, -22.0 ]
 */
-
-// MODULES //
-
-var main = require( './main.js' );
+declare function saxpb( arrays: [ float32ndarray, typedndarray<number>, typedndarray<number> ] ): float32ndarray;
 
 
 // EXPORTS //
 
-module.exports = main;
+export = saxpb;
