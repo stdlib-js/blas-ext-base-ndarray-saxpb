@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,10 +16,11 @@
 * limitations under the License.
 */
 
-#include "stdlib/blas/ext/base/ndarray/saxpb.h"
-#include "stdlib/blas/ext/base/saxpb.h"
-#include "stdlib/ndarray/ctor.h"
-#include "stdlib/blas/base/shared.h"
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@main/index.d.ts"/>
+
+import { float32ndarray, typedndarray } from '@stdlib/types/ndarray';
 
 /**
 * Multiplies each element in a one-dimensional single-precision floating-point ndarray by a scalar constant and adds a scalar constant to each result.
@@ -32,20 +33,29 @@
 *     -   a zero-dimensional ndarray containing the scalar constant to multiply.
 *     -   a zero-dimensional ndarray containing the scalar constant to add.
 *
-* @param arrays    list containing ndarrays
+* @param arrays - array-like object containing ndarrays
+* @returns input ndarray
+*
+* @example
+* var Float32Vector = require( '@stdlib/ndarray-vector-float32' );
+* var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
+*
+* var x = new Float32Vector( [ -2.0, 1.0, 3.0, -5.0 ] );
+*
+* var alpha = scalar2ndarray( 5.0, {
+*     'dtype': 'float32'
+* });
+*
+* var beta = scalar2ndarray( 3.0, {
+*     'dtype': 'float32'
+* });
+*
+* var out = saxpb( [ x, alpha, beta ] );
+* // returns <ndarray>[ -7.0, 8.0, 18.0, -22.0 ]
 */
-void stdlib_blas_ext_saxpb( const struct ndarray *arrays[] ) {
-	const struct ndarray *x = arrays[ 0 ];
+declare function saxpb( arrays: [ float32ndarray, typedndarray<number>, typedndarray<number> ] ): float32ndarray;
 
-	float alpha;
-	float beta;
-	stdlib_ndarray_get_float32( arrays[ 1 ], NULL, &alpha );
-	stdlib_ndarray_get_float32( arrays[ 2 ], NULL, &beta );
 
-	const CBLAS_INT N = stdlib_ndarray_dimension( x, 0 );
-	const CBLAS_INT strideX = stdlib_ndarray_stride_elements( x, 0 );
-	const CBLAS_INT offsetX = stdlib_ndarray_offset_elements( x );
+// EXPORTS //
 
-	float *dataX = (float *)stdlib_ndarray_data( x );
-	API_SUFFIX(stdlib_strided_saxpb_ndarray)( N, alpha, beta, dataX, strideX, offsetX );
-}
+export = saxpb;
